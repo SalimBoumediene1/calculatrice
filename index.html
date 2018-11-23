@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="script.js"></script>
+<head>
+  <title>Page Title</title>
+</head>
+
+<body>
+    <div class="container text-center col-md-6">
+        <h1>Calculatrice</h1>
+        <input id="display" type="text" class="form-control" id="usr">
+        <div class="container row mt-5">
+            <button id="button" onclick="()" type="button" class="button btn btn-primary col-md-3 mr-1">1</button>
+            <button id="button" type="button" class="button btn btn-primary col-md-3 mr-1">2</button>
+            <button id="button" type="button" class="button btn btn-primary col-md-3 mr-1">3</button>
+            <button id="button" type="button" class="button btn btn-success col-md-2 mr-0">+</button>
+        </div>
+        <div class="container row mt-1">
+                <button id="button" type="button" class="button btn btn-primary col-md-3 mr-1">4</button>
+                <button id="button" type="button" class="button btn btn-primary col-md-3 mr-1">5</button>
+                <button id="button" type="button" class="button btn btn-primary col-md-3 mr-1">6</button>
+                <button id="button" type="button" class="button btn btn-success col-md-2 mr-0">-</button>
+        </div>
+        <div class="container row mt-1">
+                <button id="button" type="button" class="button btn btn-primary col-md-3 mr-1">7</button>
+                <button id="button" type="button" class="button btn btn-primary col-md-3 mr-1">8</button>
+                <button id="button" type="button" class="button btn btn-primary col-md-3 mr-1">9</button>
+                <button id="button" type="button" class="button btn btn-success col-md-2 mr-0">*</button>
+        </div>
+        <div class="container row mt-1">
+                <button id="egal" type="button" class="btn btn-success col-md-4 mr-1">=</button>
+                <button id="clear" type="button" class="btn btn-sucess col-md-4 mr-1">clear</button>
+                <div class="col-md-1"></div>
+                <button id="button" type="button" class="button btn btn-success col-md-2 ml-1">/</button>
+        </div>
+    </div>
+</body>
+<script>
+    
+    let result = 0;
+    function calculatrice(result){
+        let calcul= result;
+    $("#display").val(result);
+    
+        $( ".button" ).each(function(index) {
+            $(this).on("click", function(){
+                calcul += $(this).html();
+                $("#display").val(calcul);
+            });
+        });
+        $( "#clear" ).click(function() {
+            calcul = "";
+            $("#display").val('')
+        });
+        const symb = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/; 
+        $( "#egal" ).click(function() {
+            let numbers = calcul.split(symb);
+            if (calcul.includes("+")){
+                result = add(parseInt(numbers[0]), parseInt(numbers[1]));
+                $("#display").val(result);
+                return calculatrice(result);
+            }else if (calcul.includes("-")){
+                result = substract(parseInt(numbers[0]), parseInt(numbers[1]));
+                $("#display").val(result);
+                return calculatrice(result);
+            }else if(calcul.includes("*")){
+                result = multiply(parseInt(numbers[0]), parseInt(numbers[1]));
+                $("#display").val(result);
+                return calculatrice(result);
+            }else if(calcul.includes("/")){
+                result = divide(parseInt(numbers[0]), parseInt(numbers[1]));
+                $("#display").val(result);
+                return calculatrice(result);
+            }
+        });
+        };
+        calculatrice(result);
+
+
+console.log(divide(10,2))
+</script>
+
+</html> 
